@@ -1,4 +1,4 @@
-package br.com.fiap.tds.javaadv.firstSpringBootServices;
+package br.com.fiap.tds.javaadv.FirstSpringBootServices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
