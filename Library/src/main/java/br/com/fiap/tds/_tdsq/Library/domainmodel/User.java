@@ -21,7 +21,12 @@ public class User {
     private @Setter @Getter String password;
 
     //private @Setter @Getter Post post;
-    //private @Setter @Getter Profile profile;
+    //private @Setter @Getter Profile profile
+
+
+    public User(UUID id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -32,7 +37,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password);
+        return Objects.hashCode(id);
     }
 
     @Override

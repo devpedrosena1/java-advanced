@@ -3,13 +3,15 @@ package br.com.fiap.tds._tdsq.Library.domainmodel.repositories;
 import br.com.fiap.tds._tdsq.Library.domainmodel.User;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface UserRepository <T, ID>{
+public interface UserRepository<T, ID> {
+    List<T> findAll();
 
-    List<T> findAll(ID id);
+    T findById(ID id);
 
-    User findById(UUID id);
+    T create(T user);
 
-    User postUser(UUID id);
+    boolean existsById(ID id);
+
+    void removeById(ID id);
 }
