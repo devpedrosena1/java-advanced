@@ -11,4 +11,5 @@ public interface UserRepository <T, ID>{
 
     User findById(UUID id);
 
+    User postUser(UUID id);
 }

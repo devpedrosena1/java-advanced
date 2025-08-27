@@ -1,15 +1,11 @@
-package br.com.fiap.tds._tdsq.Library.presentation.controllers.transferObjects;
+package br.com.fiap.tds._tdsq.Library.presentation.controllers;
 
 import br.com.fiap.tds._tdsq.Library.domainmodel.User;
 import br.com.fiap.tds._tdsq.Library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,8 +18,7 @@ public class UserApiController {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        List<User> users = new ArrayList<>();
-        users.add(this.userService.findAll());
+        List<User> users = this.userService.findAll();
         return ResponseEntity.ok(users);
     }
 
@@ -34,6 +29,12 @@ public class UserApiController {
             return ResponseEntity.notFound().build();
         else
             return ResponseEntity.ok(user);
+    }
+
+    @PostMapping()
+    public ResponseEntity<User> postUser(@RequestBody User user) {
+        User savedUser = this.userService.postUser(user);
+        return ResponseEntity.ok(savedUser);
     }
 
 }

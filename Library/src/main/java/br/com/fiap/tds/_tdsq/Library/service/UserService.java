@@ -9,4 +9,7 @@ public interface UserService {
 
     User findAll();
 
+    User findById(UUID id);
+
+    User postUser(UUID id);
 }

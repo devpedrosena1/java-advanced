@@ -23,7 +23,12 @@ public class NonPersistentUserRepository implements UserRepository <User, UUID>{
 
     @Override
     public User findById(UUID id) {
-        return null;
+        return this.findById(id);
+    }
+
+    @Override
+    public User postUser(UUID id) {
+        return this.postUser(id);
     }
 
 }

@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.findById(id);
     }
 
+    @Override
+    public User postUser(UUID id) {
+        return this.userRepository.postUser(id);
+    }
+
 }
