@@ -1,9 +1,8 @@
-package br.com.fiap.tds._tdsq.Library.service;
+package br.com.fiap.tds.javaadv.Library.service;
 
-import br.com.fiap.tds._tdsq.Library.domainmodel.User;
-import br.com.fiap.tds._tdsq.Library.domainmodel.repositories.UserRepository;
+import br.com.fiap.tds.javaadv.Library.domainmodel.User;
+import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository<User, UUID> userRepository;
 
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findById(UUID id){
+    public User findById(UUID id) {
         return this.userRepository.findById(id);
     }
 

@@ -1,4 +1,4 @@
-package br.com.fiap.tds._tdsq.Library;
+package br.com.fiap.tds.javaadv.Library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

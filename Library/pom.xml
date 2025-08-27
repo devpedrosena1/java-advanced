@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.4</version>
+		<version>3.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.fiap.tds.2tdsq</groupId>
+	<groupId>br.com.fiap.tds.javaadv</groupId>
 	<artifactId>Library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Library</name>
-	<description>Uma descricao qualquer</description>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -38,12 +38,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

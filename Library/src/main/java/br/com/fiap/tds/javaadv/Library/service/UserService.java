@@ -1,6 +1,6 @@
-package br.com.fiap.tds._tdsq.Library.service;
+package br.com.fiap.tds.javaadv.Library.service;
 
-import br.com.fiap.tds._tdsq.Library.domainmodel.User;
+import br.com.fiap.tds.javaadv.Library.domainmodel.User;
 
 import java.util.List;
 import java.util.UUID;

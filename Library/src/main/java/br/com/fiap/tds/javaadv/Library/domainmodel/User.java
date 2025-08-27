@@ -1,4 +1,4 @@
-package br.com.fiap.tds._tdsq.Library.domainmodel;
+package br.com.fiap.tds.javaadv.Library.domainmodel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,16 +13,9 @@ import java.util.UUID;
 public class User {
 
     private @Setter @Getter UUID id;
-
     private @Setter @Getter String name;
-
     private @Setter @Getter String email;
-
     private @Setter @Getter String password;
-
-    //private @Setter @Getter Post post;
-    //private @Setter @Getter Profile profile
-
 
     public User(UUID id) {
         this.id = id;
