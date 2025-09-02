@@ -3,7 +3,6 @@ package br.com.fiap.tds.javaadv.Library.presentation.controllers;
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
 import br.com.fiap.tds.javaadv.Library.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
