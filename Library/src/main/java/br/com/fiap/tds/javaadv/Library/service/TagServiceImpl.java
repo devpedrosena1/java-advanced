@@ -34,11 +34,11 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public boolean existsById(UUID id) {
-        return false;
+        return this.tagRepository.existsById(id);
     }
 
     @Override
     public void removeById(UUID id) {
-
+        this.tagRepository.deleteById(id);
     }
 }
