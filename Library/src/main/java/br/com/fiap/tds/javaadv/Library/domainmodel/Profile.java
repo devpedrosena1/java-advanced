@@ -26,7 +26,7 @@ public class Profile {
     private @Getter @Setter String profilePicture;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private @Getter @Setter User user;
 
     @Override
