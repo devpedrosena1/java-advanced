@@ -49,5 +49,7 @@ public class UserApiController {
 
     }
 
+    // falta um metodo partialUpdate
+
 
 }

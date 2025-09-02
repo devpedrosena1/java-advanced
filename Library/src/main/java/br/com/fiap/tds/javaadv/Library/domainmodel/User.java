@@ -1,24 +1,49 @@
 package br.com.fiap.tds.javaadv.Library.domainmodel;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "USERS")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private @Setter @Getter UUID id;
+
+    @Column(name = "NAME", length = 100, nullable = false)
     private @Setter @Getter String name;
+
+    @Column(name = "EMAIL", length = 50, nullable = false)
     private @Setter @Getter String email;
+
+    @Column(name = "PASSWORD", length = 255, nullable = false)
     private @Setter @Getter String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private @Getter @Setter List<Post> posts;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private @Getter @Setter Profile profile;
 
     public User(UUID id) {
         this.id = id;
+    }
+
+    public User(UUID id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     @Override
