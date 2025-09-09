@@ -3,7 +3,6 @@ package br.com.fiap.tds.javaadv.Library.service;
 import br.com.fiap.tds.javaadv.Library.domainmodel.Post;
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
 import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepository;
-import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<User> findAll() {

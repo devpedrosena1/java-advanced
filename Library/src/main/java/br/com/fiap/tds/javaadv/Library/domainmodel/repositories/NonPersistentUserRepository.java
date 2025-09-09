@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class NonPersistentUserRepository implements UserRepository<User, UUID> {
+public class NonPersistentUserRepository implements UserRepositoryOld<User, UUID> {
 
     // database in memory
     private List<User> internalData = new ArrayList<>();
