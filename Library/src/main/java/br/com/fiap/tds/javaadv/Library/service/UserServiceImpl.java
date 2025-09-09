@@ -1,14 +1,13 @@
 package br.com.fiap.tds.javaadv.Library.service;
 
+import br.com.fiap.tds.javaadv.Library.domainmodel.Post;
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
 import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepository;
 import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +58,16 @@ public class UserServiceImpl implements UserService {
             userFromDateBase.setPassword(user.getPassword());
 
         return this.create(userFromDateBase);
+    }
+
+    @Override
+    public Collection<? extends User> findByEmail(String email) {
+        List<User> users = new LinkedList<>();
+        users.addAll(this.userRepository.findByEmail(email));
+        return users;
+    }
+
+    public Collection<Post> getAllPostsFromUser(User user) {
+        return user.getPosts();
     }
 }

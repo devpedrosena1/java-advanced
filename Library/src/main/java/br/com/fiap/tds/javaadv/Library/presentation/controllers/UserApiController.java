@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,6 +77,18 @@ public class UserApiController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/nome")
+    public ResponseEntity<List<User>> findAllByName(@RequestParam String name) {
+        return null;
+    }
 
+
+    @GetMapping("/emails")
+    public ResponseEntity<List<User>> findAllByEmail(@RequestParam String email) {
+        List<User> users = new ArrayList<>();
+        users.addAll(this.userService.findByEmail( email ));
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
 }
