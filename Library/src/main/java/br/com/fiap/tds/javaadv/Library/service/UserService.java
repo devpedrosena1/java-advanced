@@ -1,21 +1,29 @@
 package br.com.fiap.tds.javaadv.Library.service;
 
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
-    List<User> findAll();
+    public List<User> findAll();
 
-    User findById(UUID id);
+    public Optional<User> findById(UUID id);
 
-    User create(User user);
+    public User create(User user);
 
-    boolean existsById(UUID id);
+    public boolean existsById(UUID id);
 
-    void removeById(UUID id);
+    public void removeById(UUID id);
 
-    Collection<? extends User> findByEmail(String email);
+    public void remove(User user);
+
+    public User partialUpdate(UUID id, User user);
+
+    List<? extends User> findByEmail(String email);
+
+    public Page<User> findAllPaged(Pageable pageable);
 }

@@ -1,9 +1,13 @@
 package br.com.fiap.tds.javaadv.Library.presentation.controllers;
 
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
+import br.com.fiap.tds.javaadv.Library.presentation.transferObjects.UserDTO;
 import br.com.fiap.tds.javaadv.Library.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,54 +26,63 @@ public class UserApiController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok(this.userService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") UUID id) {
-        User user = this.userService.findById(id);
-        if(user == null)
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.ok(user);
+    @GetMapping("/{id}") //http://localhost:8080/api/users/1
+    public ResponseEntity<UserDTO> findById(@PathVariable("id") UUID id){
+//        User user = this.userService.findById(id);
+//        if(user == null)
+//            return ResponseEntity.notFound().build();
+//        else
+//            return ResponseEntity.ok(user);
+        return this.userService.findById(id)
+                .map(user -> ResponseEntity.ok(UserDTO.fromEntity(user)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        User newUser = this.userService.create(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    public ResponseEntity<UserDTO> save( @Valid @RequestBody UserDTO userDto){
+        User newUser = this.userService.create(UserDTO.toEntity(userDto));
+        return new ResponseEntity<>(UserDTO.fromEntity(newUser), HttpStatus.CREATED);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteById(@RequestBody UUID id) {
-        if (!this.userService.existsById(id))
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
-        else
-            this.userService.removeById(id);
+    public ResponseEntity<Void> deleteById(@RequestBody UUID id){
+        if( !this.userService.existsById(id ))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        this.userService.removeById(id);
         return ResponseEntity.noContent().build();
+    }
 
+    @DeleteMapping("/removeObject")
+    public ResponseEntity<Void> delete(@RequestBody UserDTO user){
+        if(!this.userService.existsById(user.getId()))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        this.userService.remove(UserDTO.toEntity(user));
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable("id") UUID id, @RequestBody User user){
+    public ResponseEntity<UserDTO> update(@PathVariable("id") UUID id, @Valid @RequestBody UserDTO userDto){
         if( !this.userService.existsById(id) )
             return ResponseEntity.notFound().build();
-//        User userFromDatabase = this.userService.findById(id);
+        User user = UserDTO.toEntity(userDto);
         user.setId(id);
         return new ResponseEntity<>(
-                this.userService.create(user),
+                UserDTO.fromEntity(this.userService.create(user)),
                 HttpStatus.CREATED
         );
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> partialUpdate(@PathVariable("id") UUID id, @RequestBody User user) {
+    public ResponseEntity<UserDTO> partialUpdate(@PathVariable("id") UUID id, @Valid @RequestBody UserDTO userDto) {
         User updatedUser = null;
         try {
-            updatedUser = this.userService.findById(id);
+            updatedUser = this.userService.findById(userDto.getId()).orElse(null);
             return new ResponseEntity<>(
-                    updatedUser,
+                    UserDTO.fromEntity(updatedUser),
                     HttpStatus.CREATED
             );
         } catch (IllegalArgumentException ex) {
@@ -77,18 +90,31 @@ public class UserApiController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/nome")
-    public ResponseEntity<List<User>> findAllByName(@RequestParam String name) {
+
+    @GetMapping("/name")
+    public ResponseEntity<List<UserDTO>> findAllByName(@RequestParam String name){
         return null;
     }
 
+    //http://localhost:8080/api/users?email=teste@gmail.com
+    @GetMapping("/")
+    public ResponseEntity<List<UserDTO>> findAllByEmail(@RequestParam String email){
 
-    @GetMapping("/emails")
-    public ResponseEntity<List<User>> findAllByEmail(@RequestParam String email) {
-        List<User> users = new ArrayList<>();
-        users.addAll(this.userService.findByEmail( email ));
+        return ResponseEntity.ok(
+                new ArrayList<>(
+                        this.userService.findByEmail(email)
+                                .stream()
+                                .map(UserDTO::fromEntity)
+                                .toList()));
 
-        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    //http://localhost:8080/api/users/paged?page=0&size=10&sort=name,desc
+    @GetMapping("paged")
+    public ResponseEntity<Page<UserDTO>> findAllPaged(Pageable pageable){
+        return ResponseEntity.ok(
+                this.userService.findAllPaged(pageable)
+                        .map(UserDTO::fromEntity)
+        );
+    }
 }

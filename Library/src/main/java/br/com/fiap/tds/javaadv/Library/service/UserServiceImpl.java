@@ -4,6 +4,8 @@ import br.com.fiap.tds.javaadv.Library.domainmodel.Post;
 import br.com.fiap.tds.javaadv.Library.domainmodel.User;
 import br.com.fiap.tds.javaadv.Library.domainmodel.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(UUID id) {
-        return this.userRepository.findById(id).orElse(null);
+    public Optional<User> findById(UUID id){
+        return this.userRepository.findById(id);
     }
 
     @Override
@@ -41,32 +43,39 @@ public class UserServiceImpl implements UserService {
         this.userRepository.deleteById(id);
     }
 
+    @Override
+    public void remove(User user) {
+        this.removeById(user.getId());
+    }
+
     public User partialUpdate(UUID id, User user) {
-        if (!this.userRepository.existsById(id))
+        if( !this.userRepository.existsById(id) )
             throw new IllegalArgumentException("Entity not found");
+        User userFromDatabase = this.userRepository.findById(id).orElse(null);
 
-        User userFromDateBase = this.userRepository.findById(id).orElse(null);
-
-        if (!userFromDateBase.getName().equals(user.getName()))
-            userFromDateBase.setName(user.getName());
-
-        if (!userFromDateBase.getEmail().equals(user.getEmail()))
-            userFromDateBase.setEmail(user.getEmail());
-
-        if (!userFromDateBase.getPassword().equals(user.getPassword()))
-            userFromDateBase.setPassword(user.getPassword());
-
-        return this.create(userFromDateBase);
+        if(!userFromDatabase.getName().equals(user.getName()))
+            userFromDatabase.setName(user.getName());
+        if(!userFromDatabase.getEmail().equals(user.getEmail()))
+            userFromDatabase.setEmail(user.getEmail());
+        if(!userFromDatabase.getPassword().equals(user.getPassword()))
+            userFromDatabase.setPassword(user.getPassword());
+        return this.create(userFromDatabase);
     }
 
     @Override
-    public Collection<? extends User> findByEmail(String email) {
+    public List<? extends User> findByEmail(String email) {
         List<User> users = new LinkedList<>();
         users.addAll(this.userRepository.findByEmail(email));
         return users;
     }
 
-    public Collection<Post> getAllPostsFromUser(User user) {
+    @Override
+    public Page<User> findAllPaged(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
+    }
+
+
+    public Collection<Post> getAllPostsFromUser(User user){
         return user.getPosts();
     }
 }
