@@ -35,21 +35,32 @@ public class DroneServiceImpl implements DroneService {
         return this.droneRepository.existsById(id);
     }
 
-    public Drone partialUpdate(UUID id, Drone drone) {
-        if( !this.droneRepository.existsById(id) )
-            throw new IllegalArgumentException("Entity not found");
-        Drone droneFromDatabase = this.droneRepository.findById(id).orElse(null);
+    @Override
+    public Drone update(UUID id, Drone drone) {
+        Drone droneFromDatabase = this.droneRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Drone not found"));
 
-        if (!Objects.equals(droneFromDatabase.getBatteryCapacity(), drone.getBatteryCapacity())) {
+        // exemplo: atualiza só se não for null
+        if (drone.getModel() != null) {
+            droneFromDatabase.setModel(drone.getModel());
+        }
+        if (droneFromDatabase.getBatteryCapacity() != drone.getBatteryCapacity()) {
             droneFromDatabase.setBatteryCapacity(drone.getBatteryCapacity());
         }
+        if (drone.getStatus() != null) {
+            droneFromDatabase.setStatus(drone.getStatus());
+        }
 
-
-        return this.create(droneFromDatabase);
+        return this.droneRepository.save(droneFromDatabase);
     }
 
     @Override
     public void remove(Drone drone) {
+        this.droneRepository.delete(drone);
+    }
 
+    @Override
+    public void removeById(UUID id) {
+        this.droneRepository.deleteById(id);
     }
 }

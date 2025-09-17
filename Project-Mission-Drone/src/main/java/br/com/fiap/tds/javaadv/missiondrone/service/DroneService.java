@@ -12,6 +12,8 @@ public interface DroneService {
     public Optional<Drone> findById(UUID id);
     public Drone create(Drone drone);
     public boolean existsById(UUID id);
+    public Drone update(UUID id, Drone drone);
     public void remove(Drone drone);
+    public void removeById(UUID id);
 
 }
