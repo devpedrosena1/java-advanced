@@ -2,6 +2,7 @@ package br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects;
 
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Drone;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.UUID;
@@ -15,7 +16,7 @@ public class DroneDTO {
     @NotBlank(message = "This field is required.")
     private String model;
 
-    @NotBlank(message = "This field is required.")
+    @NotNull(message = "This field is required.")
     private int batteryCapacity;
 
     @NotBlank(message = "This field is required.")

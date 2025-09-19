@@ -1,0 +1,634 @@
+2025-09-19T07:32:47.312-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 53369 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:32:47.320-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:32:47.618-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-19T07:32:47.619-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-19T07:32:50.917-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:32:51.094-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 143 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:32:52.746-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:32:52.803-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:32:52.805-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:32:52.921-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:32:52.922-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5302 ms
+2025-09-19T07:32:53.626-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-19T07:32:54.690-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:32:54.694-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-19T07:32:54.858-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:32:55.032-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-19T07:32:55.124-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:32:56.018-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:32:56.177-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:32:59.924-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:33:00.129-03:00 DEBUG 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:33:00.145-03:00 DEBUG 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:33:00.168-03:00 DEBUG 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:33:00.198-03:00 DEBUG 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:33:00.204-03:00 DEBUG 53369 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:33:00.313-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:33:02.346-03:00  WARN 53369 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:33:03.833-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:33:04.101-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:33:04.320-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:33:04.372-03:00  INFO 53369 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 18.845 seconds (process running for 23.244)
+2025-09-19T07:33:09.603-03:00  INFO 53369 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-19T07:33:09.610-03:00  INFO 53369 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-19T07:33:09.649-03:00  INFO 53369 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 39 ms
+2025-09-19T07:33:32.373-03:00  INFO 53369 --- [Project-Mission-Drone] [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 851 ms
+2025-09-19T07:40:36.475-03:00 ERROR 53369 --- [Project-Mission-Drone] [http-nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: jakarta.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'jakarta.validation.constraints.NotBlank' validating type 'java.lang.Integer'. Check configuration for 'batteryCapacity'] with root cause
+
+jakarta.validation.UnexpectedTypeException: HV000030: No validator could be found for constraint 'jakarta.validation.constraints.NotBlank' validating type 'java.lang.Integer'. Check configuration for 'batteryCapacity'
+	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.getExceptionForNullValidator(ConstraintTree.java:116) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.getInitializedConstraintValidator(ConstraintTree.java:162) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.constraintvalidation.SimpleConstraintTree.validateConstraints(SimpleConstraintTree.java:58) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.validateConstraints(ConstraintTree.java:75) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.metadata.core.MetaConstraint.doValidateConstraint(MetaConstraint.java:130) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.metadata.core.MetaConstraint.validateConstraint(MetaConstraint.java:123) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validateMetaConstraint(ValidatorImpl.java:555) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraintsForSingleDefaultGroupElement(ValidatorImpl.java:518) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraintsForDefaultGroup(ValidatorImpl.java:488) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraintsForCurrentGroup(ValidatorImpl.java:450) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validateInContext(ValidatorImpl.java:400) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.hibernate.validator.internal.engine.ValidatorImpl.validate(ValidatorImpl.java:172) ~[hibernate-validator-8.0.3.Final.jar:8.0.3.Final]
+	at org.springframework.validation.beanvalidation.SpringValidatorAdapter.validate(SpringValidatorAdapter.java:105) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.boot.autoconfigure.validation.ValidatorAdapter.validate(ValidatorAdapter.java:67) ~[spring-boot-autoconfigure-3.5.5.jar:3.5.5]
+	at org.springframework.validation.DataBinder.validate(DataBinder.java:1431) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.validateIfApplicable(AbstractMessageConverterMethodArgumentResolver.java:291) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:157) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:181) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.44.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.10.jar:6.2.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.44.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[na:na]
+
+2025-09-19T07:42:44.303-03:00  INFO 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:42:44.761-03:00  INFO 53369 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:42:45.252-03:00  INFO 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:42:45.517-03:00 DEBUG 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:42:45.734-03:00 DEBUG 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:42:46.085-03:00  WARN 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:42:46.089-03:00  INFO 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-19T07:42:46.316-03:00  INFO 53369 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-19T07:43:05.339-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:43:05.346-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:43:05.669-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-19T07:43:05.670-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-19T07:43:09.754-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:43:09.963-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 135 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:43:11.631-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:43:11.657-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:43:11.657-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:43:11.713-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:43:11.714-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6040 ms
+2025-09-19T07:43:11.933-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-19T07:43:12.331-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:43:12.334-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-19T07:43:12.415-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:43:12.540-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-19T07:43:12.617-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:43:13.135-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:43:13.281-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:43:14.866-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:43:14.897-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:43:14.904-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:43:14.912-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:43:14.923-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:43:14.926-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:43:14.953-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:43:16.263-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:43:19.257-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:43:19.611-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:43:19.987-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:43:20.061-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 16.892 seconds (process running for 19.722)
+2025-09-19T07:43:51.609-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2025-09-19T07:43:51.955-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:43:52.033-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:43:52.114-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:43:52.220-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-5] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:43:52.338-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-5] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:43:53.232-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-5] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:43:53.237-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-19T07:43:53.299-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-19T07:43:56.021-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:43:56.021-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:43:58.223-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:43:58.284-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:43:58.896-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:43:58.901-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:43:58.904-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:43:58.964-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:43:58.965-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2924 ms
+2025-09-19T07:43:59.236-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-09-19T07:43:59.255-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:43:59.299-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-09-19T07:43:59.316-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:43:59.336-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:43:59.428-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:43:59.450-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:43:59.880-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:43:59.886-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:43:59.887-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:43:59.905-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:43:59.925-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:43:59.946-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:43:59.964-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:00.667-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:44:01.362-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:44:01.451-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:44:01.502-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:44:01.551-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 5.761 seconds (process running for 61.212)
+2025-09-19T07:44:01.580-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:44:02.891-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2025-09-19T07:44:02.914-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-7] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:44:02.974-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:44:03.001-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:03.010-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-7] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:03.022-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-7] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:03.043-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-7] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:44:03.050-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-09-19T07:44:03.062-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-09-19T07:44:03.502-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:44:03.503-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:44:04.557-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:44:04.640-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:44:05.553-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:44:05.569-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:44:05.569-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:44:05.656-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:44:05.660-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2151 ms
+2025-09-19T07:44:06.234-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-09-19T07:44:06.256-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection conn20: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:44:06.257-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-09-19T07:44:06.264-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:44:06.272-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:44:06.288-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:44:06.290-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:44:06.530-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:44:06.531-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:06.537-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:06.540-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:44:06.566-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:44:06.586-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:44:06.618-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:07.218-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:44:07.808-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:44:07.906-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:44:07.990-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:44:08.037-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 4.66 seconds (process running for 67.698)
+2025-09-19T07:44:08.042-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:44:21.440-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2025-09-19T07:44:21.550-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-12] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:44:21.577-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:44:21.687-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-12] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:21.722-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-12] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:21.814-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-12] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:21.884-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-12] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:44:21.886-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-12] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2025-09-19T07:44:21.895-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-12] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2025-09-19T07:44:24.086-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:44:24.087-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:44:24.853-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:44:24.886-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:44:25.411-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:44:25.434-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:44:25.440-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:44:25.498-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:44:25.499-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1400 ms
+2025-09-19T07:44:25.943-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-09-19T07:44:25.980-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection conn30: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:44:25.988-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-09-19T07:44:25.996-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:44:26.013-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:44:26.063-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:44:26.113-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:44:26.747-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:44:26.748-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:26.751-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:26.752-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:44:26.756-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:44:26.758-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:44:26.764-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:27.493-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:44:27.958-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:44:28.002-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:44:28.033-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:44:28.041-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 4.119 seconds (process running for 87.703)
+2025-09-19T07:44:28.043-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:44:32.414-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2025-09-19T07:44:32.423-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-16] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:44:32.431-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:44:32.447-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-16] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:32.451-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-16] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:32.461-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-16] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:32.472-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-16] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:44:32.473-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2025-09-19T07:44:32.476-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2025-09-19T07:44:32.849-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:44:32.852-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:44:33.163-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:44:33.223-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:44:33.583-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:44:33.587-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:44:33.587-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:44:33.606-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:44:33.606-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 750 ms
+2025-09-19T07:44:33.737-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2025-09-19T07:44:33.746-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection conn40: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:44:33.747-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2025-09-19T07:44:33.751-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:44:33.756-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:44:33.772-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:44:33.776-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-5)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:44:33.945-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:44:33.946-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:44:33.946-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:44:33.947-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:44:33.949-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:44:33.952-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:44:33.962-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:44:34.417-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:44:34.793-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:44:34.818-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:44:34.841-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:44:34.847-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 2.07 seconds (process running for 94.509)
+2025-09-19T07:44:34.849-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:44:35.749-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-19T07:44:35.750-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-19T07:44:35.753-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-09-19T07:44:38.733-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 915 ms
+2025-09-19T07:45:00.640-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2025-09-19T07:45:00.795-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-20] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:45:00.804-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:45:00.838-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-20] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:45:00.855-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-20] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:45:00.881-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-20] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:45:00.917-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-20] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:45:00.919-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-20] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2025-09-19T07:45:00.927-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-20] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2025-09-19T07:45:02.901-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:45:02.901-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:45:03.580-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:45:03.606-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:45:04.010-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:45:04.013-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:45:04.013-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:45:04.046-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:45:04.046-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1141 ms
+2025-09-19T07:45:04.139-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2025-09-19T07:45:04.146-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection conn51: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:45:04.147-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2025-09-19T07:45:04.151-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:45:04.159-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:45:04.176-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:45:04.179-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:45:04.719-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:45:04.721-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:45:04.726-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:45:04.727-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:45:04.738-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:45:04.742-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:45:04.747-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:45:05.184-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:45:05.469-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:45:05.527-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:45:05.567-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:45:05.579-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 2.737 seconds (process running for 125.24)
+2025-09-19T07:45:05.582-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:45:07.943-03:00  INFO 54445 --- [Project-Mission-Drone] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2025-09-19T07:45:07.954-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-24] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:45:07.964-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:45:07.974-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-24] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:45:07.978-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-24] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:45:07.995-03:00 DEBUG 54445 --- [Project-Mission-Drone] [Thread-24] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:45:08.003-03:00  WARN 54445 --- [Project-Mission-Drone] [Thread-24] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:45:08.008-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2025-09-19T07:45:08.013-03:00  INFO 54445 --- [Project-Mission-Drone] [Thread-24] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2025-09-19T07:45:08.448-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 54445 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T07:45:08.458-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T07:45:09.010-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T07:45:09.025-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 2 JPA repository interfaces.
+2025-09-19T07:45:09.215-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T07:45:09.217-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T07:45:09.219-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T07:45:09.250-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T07:45:09.250-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 779 ms
+2025-09-19T07:45:09.316-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2025-09-19T07:45:09.319-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection conn61: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T07:45:09.320-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2025-09-19T07:45:09.322-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T07:45:09.325-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T07:45:09.334-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T07:45:09.337-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-7)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T07:45:09.491-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T07:45:09.495-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:45:09.497-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:45:09.498-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T07:45:09.506-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T07:45:09.511-03:00 DEBUG 54445 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T07:45:09.519-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:45:09.802-03:00  WARN 54445 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T07:45:10.144-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T07:45:10.173-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T07:45:10.199-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T07:45:10.210-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 2.034 seconds (process running for 129.871)
+2025-09-19T07:45:10.216-03:00  INFO 54445 --- [Project-Mission-Drone] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-09-19T07:45:35.682-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-19T07:45:35.683-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-19T07:45:35.685-03:00  INFO 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-09-19T07:45:35.821-03:00 TRACE 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-19T07:45:35.887-03:00 TRACE 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-19T07:45:35.943-03:00 DEBUG 54445 --- [Project-Mission-Drone] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    insert 
+    into
+        drone
+        (battery_capacity, model, status, id) 
+    values
+        (?, ?, ?, ?)
+2025-09-19T07:46:52.435-03:00  INFO 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T07:46:52.593-03:00  INFO 54445 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T07:46:53.046-03:00  INFO 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T07:46:53.137-03:00 DEBUG 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T07:46:53.339-03:00 DEBUG 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T07:46:53.461-03:00  WARN 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T07:46:53.467-03:00  INFO 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2025-09-19T07:46:53.540-03:00  INFO 54445 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
