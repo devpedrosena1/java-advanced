@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/drone")
@@ -53,7 +55,21 @@ public class DroneApiController {
         );
     }
 
-    // att parcialmente
+    @Operation(summary = "Update partial drone by id")
+    @PatchMapping("/{id}")
+    public ResponseEntity<DroneDTO> partialUpdate(@PathVariable("id") UUID id, @Valid @RequestBody DroneDTO droneDto) {
+        Drone updatedDrone = null;
+        try {
+            updatedDrone = this.droneService.findById(droneDto.getId()).orElse(null);
+            return new ResponseEntity<>(
+                DroneDTO.fromEntity(updatedDrone),
+                HttpStatus.CREATED
+            );
+        } catch (IllegalArgumentException ex){
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @Operation(summary = "Delete drone by id")
     @DeleteMapping
@@ -64,6 +80,15 @@ public class DroneApiController {
         return ResponseEntity.noContent().build();
     }
 
-    // delete all
+    @Operation(summary = "Delete the complete drone object")
+    @DeleteMapping("/removeObject")
+    public ResponseEntity<Void> delete(@RequestBody DroneDTO droneDto) {
+        if (!this.droneService.existsById(droneDto.getId()))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Drone not found.");
+        this.droneService.remove(DroneDTO.toEntity(droneDto));
+        return ResponseEntity.noContent().build();
+
+    }
+
 
 }
