@@ -783,3 +783,76 @@ jakarta.validation.UnexpectedTypeException: HV000030: No validator could be foun
 2025-09-19T17:26:22.870-03:00  WARN 67415 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
 2025-09-19T17:26:22.872-03:00  INFO 67415 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-09-19T17:26:22.904-03:00  INFO 67415 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-19T19:33:15.035-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 24.0.2 with PID 70357 (/home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone/target/classes started by pedro-henrique-sena in /home/pedro-henrique-sena/Documents/fiap/java-advanced/Project-Mission-Drone)
+2025-09-19T19:33:15.040-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-19T19:33:15.223-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-19T19:33:15.227-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-19T19:33:17.689-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19T19:33:17.816-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 2 JPA repository interfaces.
+2025-09-19T19:33:18.830-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-19T19:33:18.858-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-19T19:33:18.859-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-19T19:33:18.935-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-19T19:33:18.936-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3706 ms
+2025-09-19T19:33:19.209-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-19T19:33:19.610-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:blog_database user=SA
+2025-09-19T19:33:19.612-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-19T19:33:19.694-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19T19:33:19.832-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-19T19:33:19.947-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-19T19:33:20.502-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19T19:33:20.651-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-19T19:33:22.114-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19T19:33:22.144-03:00 DEBUG 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T19:33:22.150-03:00 DEBUG 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T19:33:22.161-03:00 DEBUG 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        battery_capacity integer not null,
+        id uuid not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-19T19:33:22.171-03:00 DEBUG 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        schedule_date date not null,
+        drone_id uuid not null,
+        id uuid not null,
+        location varchar(50) not null,
+        description varchar(100) not null,
+        primary key (id)
+    )
+2025-09-19T19:33:22.174-03:00 DEBUG 70357 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-19T19:33:22.212-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T19:33:23.025-03:00  WARN 70357 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-19T19:33:23.973-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-19T19:33:24.172-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-19T19:33:24.310-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-19T19:33:24.327-03:00  INFO 70357 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 10.41 seconds (process running for 12.824)
+2025-09-19T19:33:33.867-03:00  INFO 70357 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-19T19:33:33.899-03:00  INFO 70357 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-19T19:33:33.933-03:00  INFO 70357 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 33 ms
+2025-09-19T19:33:37.102-03:00  INFO 70357 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 881 ms
+2025-09-19T19:40:30.293-03:00  INFO 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-19T19:40:30.421-03:00  INFO 70357 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-19T19:40:30.677-03:00  INFO 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T19:40:30.743-03:00 DEBUG 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists drone cascade 
+2025-09-19T19:40:30.866-03:00 DEBUG 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists mission cascade 
+2025-09-19T19:40:31.158-03:00  WARN 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-19T19:40:31.162-03:00  INFO 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-19T19:40:31.201-03:00  INFO 70357 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
