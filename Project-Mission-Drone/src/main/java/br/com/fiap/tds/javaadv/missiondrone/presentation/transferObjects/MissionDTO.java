@@ -1,7 +1,9 @@
 package br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects;
 
+import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Drone;
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Mission;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -21,10 +23,10 @@ public class MissionDTO {
     @NotBlank(message = "This field is required.")
     private String location;
 
-    @NotBlank(message = "This field is required.")
+    @NotNull(message = "This field is required.")
     private LocalDate scheduledDate;
 
-    @NotBlank(message = "This field is required.")
+    @NotNull(message = "This field is required.")
     private UUID droneId;
 
     public static MissionDTO fromEntity(Mission mission) {
@@ -34,7 +36,7 @@ public class MissionDTO {
                 .description(mission.getDescription())
                 .location(mission.getLocation())
                 .scheduledDate(mission.getScheduledDate())
-                .droneId(mission.getDroneId().getId())
+                .droneId(mission.getDroneId() != null ? mission.getDroneId().getId() : null)
                 .build();
     }
 
@@ -45,6 +47,7 @@ public class MissionDTO {
                 .description(dto.getDescription())
                 .location(dto.getLocation())
                 .scheduledDate(dto.getScheduledDate())
+                .droneId(dto.getDroneId() != null ? new Drone(dto.getDroneId()) : null)
                 .build();
     }
 
