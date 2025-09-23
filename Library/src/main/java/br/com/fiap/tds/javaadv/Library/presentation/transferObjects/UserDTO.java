@@ -48,7 +48,6 @@ public class UserDTO {
         if( dto == null )
             return null;
         return User.builder()
-                .id(dto.id)
                 .id(dto.getId())
                 .name(dto.getName())
                 .email(dto.getEmail())

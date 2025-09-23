@@ -17,6 +17,7 @@ public class JwtHelper {
     private final int EXPIRATION_MS = 20 * 60 * 60 * 1000;
     private final int REFRESH_NEW_EXPIRATION_MS = 7 * 20 * 60 * 60 * 1000;
 
+    // cria token de acesso (curta duração).
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -26,21 +27,24 @@ public class JwtHelper {
                 .compact();
     }
 
+    // lê o usuário do token.
     public String extractUsername(String token) {
         return Jwts.parser().setSigningKey(getSignKey())
                 .build().parseClaimsJws(token).getBody().getSubject();
     }
 
-    // criptografia
+    // gera chave a partir da string secreta.
     private Key getSignKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     }
 
+    // checa validade.
     public boolean isTokenExpired(String token) {
         return Jwts.parser().setSigningKey(getSignKey())
                 .build().parseClaimsJws(token).getBody().getExpiration().before(new Date());
     }
 
+    // cria token de refresh (duração longa
     public String generateRefreshToken(UserDetails userDetails) {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
