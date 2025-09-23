@@ -45,7 +45,8 @@ public class JwtHelper {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 6048000000))
-                .signWith(getSignKey(), SignatureAlgorithm.HS512);
+                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
+                .signWith(getSignKey(), SignatureAlgorithm.HS512)
+                .compact();
     }
 }
