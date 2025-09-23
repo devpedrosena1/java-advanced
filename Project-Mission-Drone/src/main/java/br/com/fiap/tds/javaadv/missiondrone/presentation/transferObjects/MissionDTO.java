@@ -29,6 +29,8 @@ public class MissionDTO {
     @NotNull(message = "This field is required.")
     private UUID droneId;
 
+    private Integer estimatedBatteryUsage;
+
     public static MissionDTO fromEntity(Mission mission) {
         if (mission == null) return null;
         return MissionDTO.builder()
@@ -37,6 +39,7 @@ public class MissionDTO {
                 .location(mission.getLocation())
                 .scheduledDate(mission.getScheduledDate())
                 .droneId(mission.getDroneId() != null ? mission.getDroneId().getId() : null)
+                .estimatedBatteryUsage(mission.getEstimatedBatteryUsage())
                 .build();
     }
 
@@ -48,6 +51,7 @@ public class MissionDTO {
                 .location(dto.getLocation())
                 .scheduledDate(dto.getScheduledDate())
                 .droneId(dto.getDroneId() != null ? new Drone(dto.getDroneId()) : null)
+                .estimatedBatteryUsage(dto.getEstimatedBatteryUsage())
                 .build();
     }
 

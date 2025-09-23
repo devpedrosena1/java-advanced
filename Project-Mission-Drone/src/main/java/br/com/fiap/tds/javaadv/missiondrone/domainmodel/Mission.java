@@ -26,6 +26,9 @@ public class Mission {
     @Column(name = "SCHEDULE_DATE", nullable = false)
     private @Getter @Setter LocalDate scheduledDate;
 
+    @Column(name = "ESTIMATED_BATTERY_USAGE")
+    private @Getter @Setter Integer estimatedBatteryUsage;
+
     @ManyToOne
     @JoinColumn(name = "drone_id", nullable = false)
     private @Getter @Setter Drone droneId;
