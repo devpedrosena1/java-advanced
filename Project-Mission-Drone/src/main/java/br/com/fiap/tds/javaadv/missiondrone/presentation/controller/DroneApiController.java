@@ -27,7 +27,7 @@ public class DroneApiController {
     // http://localhost:8080/console
     // http://localhost:8080/swagger-ui/index.html
 
-    @Operation(summary = "Insert drone")
+    @Operation(summary = "Insert drone", method = "POST")
     @PostMapping
     public ResponseEntity<DroneDTO> save(@Valid @RequestBody DroneDTO droneDto) {
         Drone newDrone = this.droneService.create(DroneDTO.toEntity(droneDto));
