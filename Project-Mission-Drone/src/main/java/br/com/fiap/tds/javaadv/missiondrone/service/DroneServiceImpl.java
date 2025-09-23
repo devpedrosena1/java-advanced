@@ -63,4 +63,13 @@ public class DroneServiceImpl implements DroneService {
     public void removeById(UUID id) {
         this.droneRepository.deleteById(id);
     }
+
+    @Override
+    public Double findAverageBatteryUsage(UUID droneId) {
+        if (!droneRepository.existsById(droneId)) {
+            throw new IllegalArgumentException("Drone not found");
+        }
+        Optional<Double> optionalAverage = this.droneRepository.findAverageBatteryUsage(droneId);
+        return optionalAverage.orElse(0.0);
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -88,5 +89,12 @@ public class DroneApiController {
         this.droneService.remove(DroneDTO.toEntity(droneDto));
         return ResponseEntity.noContent().build();
 
+    }
+
+    @Operation(summary = "Return report battery by drone id")
+    @GetMapping("/{id}/battery-report")
+    public ResponseEntity<Double> findAverageBatteryUsage(@PathVariable("id") UUID id) {
+        Double average = droneService.findAverageBatteryUsage(id);
+        return ResponseEntity.ok(average);
     }
 }

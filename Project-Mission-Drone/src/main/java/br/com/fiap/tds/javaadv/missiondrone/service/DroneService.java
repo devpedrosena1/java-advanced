@@ -15,5 +15,6 @@ public interface DroneService {
     public Drone update(UUID id, Drone drone);
     public void remove(Drone drone);
     public void removeById(UUID id);
+    public Double findAverageBatteryUsage(UUID droneId);
 
 }
