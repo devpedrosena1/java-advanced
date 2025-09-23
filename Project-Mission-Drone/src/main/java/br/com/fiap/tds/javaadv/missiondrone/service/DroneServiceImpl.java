@@ -40,7 +40,6 @@ public class DroneServiceImpl implements DroneService {
         Drone droneFromDatabase = this.droneRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Drone not found"));
 
-        // exemplo: atualiza só se não for null
         if (drone.getModel() != null) {
             droneFromDatabase.setModel(drone.getModel());
         }

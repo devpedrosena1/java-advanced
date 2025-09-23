@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface DroneRepositoryCustom {
 
     Optional<Double> findAverageBatteryUsage(UUID droneId);
-    List<Drone> findDroneUsageRanking();
+//    List<Drone> findDroneUsageRanking();
 
 }

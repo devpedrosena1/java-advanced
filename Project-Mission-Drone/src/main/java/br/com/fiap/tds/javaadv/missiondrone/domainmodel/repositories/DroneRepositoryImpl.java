@@ -29,8 +29,8 @@ public class DroneRepositoryImpl implements DroneRepositoryCustom{
         return Optional.ofNullable(averageResult);
     }
 
-    @Override
-    public List findDroneUsageRanking() {
-        return List.of();
-    }
+//    @Override
+//    public List findDroneUsageRanking() {
+//        return List.of();
+//    }
 }
