@@ -1064,3 +1064,224 @@
 2025-09-23T18:46:01.401-03:00  INFO 228 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-09-23T18:46:01.401-03:00  INFO 228 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-09-23T18:46:01.412-03:00  INFO 228 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-23T19:00:43.745-03:00  INFO 13848 --- [Project-Mission-Drone] [main] .j.m.ProjectMissionDroneApplicationTests : Starting ProjectMissionDroneApplicationTests using Java 23-valhalla with PID 13848 (started by pedro in C:\Users\pedro\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\3Semestre\Java Advanced\java-advanced\Project-Mission-Drone)
+2025-09-23T19:00:43.747-03:00  INFO 13848 --- [Project-Mission-Drone] [main] .j.m.ProjectMissionDroneApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2025-09-23T19:00:45.310-03:00  INFO 13848 --- [Project-Mission-Drone] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-23T19:00:45.405-03:00  INFO 13848 --- [Project-Mission-Drone] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 2 JPA repository interfaces.
+2025-09-23T19:00:46.029-03:00  INFO 13848 --- [Project-Mission-Drone] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-23T19:00:46.110-03:00  INFO 13848 --- [Project-Mission-Drone] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-23T19:00:46.167-03:00  INFO 13848 --- [Project-Mission-Drone] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-23T19:00:46.613-03:00  INFO 13848 --- [Project-Mission-Drone] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-23T19:00:46.659-03:00  INFO 13848 --- [Project-Mission-Drone] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-23T19:00:46.931-03:00  INFO 13848 --- [Project-Mission-Drone] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:blog_database user=SA
+2025-09-23T19:00:46.938-03:00  INFO 13848 --- [Project-Mission-Drone] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-23T19:00:47.014-03:00  INFO 13848 --- [Project-Mission-Drone] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-23T19:00:48.091-03:00  INFO 13848 --- [Project-Mission-Drone] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-23T19:00:48.145-03:00 DEBUG 13848 --- [Project-Mission-Drone] [main] org.hibernate.SQL                        : 
+    create table drone (
+        id uuid not null,
+        battery_capacity integer not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-23T19:00:48.153-03:00 DEBUG 13848 --- [Project-Mission-Drone] [main] org.hibernate.SQL                        : 
+    create table mission (
+        id uuid not null,
+        description varchar(100) not null,
+        estimated_battery_usage integer,
+        location varchar(50) not null,
+        schedule_date date not null,
+        drone_id uuid not null,
+        primary key (id)
+    )
+2025-09-23T19:00:48.156-03:00 DEBUG 13848 --- [Project-Mission-Drone] [main] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-23T19:00:48.164-03:00  INFO 13848 --- [Project-Mission-Drone] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-23T19:00:48.929-03:00  WARN 13848 --- [Project-Mission-Drone] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-23T19:00:49.471-03:00  INFO 13848 --- [Project-Mission-Drone] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-23T19:00:49.555-03:00  INFO 13848 --- [Project-Mission-Drone] [main] .j.m.ProjectMissionDroneApplicationTests : Started ProjectMissionDroneApplicationTests in 6.349 seconds (process running for 7.871)
+2025-09-23T19:00:50.248-03:00  INFO 13848 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-23T19:00:50.251-03:00  INFO 13848 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-23T19:00:50.254-03:00  INFO 13848 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-23T19:01:02.792-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Starting ProjectMissionDroneApplication using Java 23-valhalla with PID 5636 (C:\Users\pedro\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\3Semestre\Java Advanced\java-advanced\Project-Mission-Drone\target\classes started by pedro in C:\Users\pedro\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\3Semestre\Java Advanced\java-advanced\Project-Mission-Drone)
+2025-09-23T19:01:02.794-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : No active profile set, falling back to 1 default profile: "default"
+2025-09-23T19:01:02.841-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-23T19:01:02.841-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-23T19:01:03.896-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-23T19:01:03.974-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 2 JPA repository interfaces.
+2025-09-23T19:01:04.554-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-23T19:01:04.571-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-23T19:01:04.571-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-23T19:01:04.626-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-23T19:01:04.626-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1785 ms
+2025-09-23T19:01:04.827-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-23T19:01:04.885-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-23T19:01:04.922-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-23T19:01:05.222-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-23T19:01:05.256-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-23T19:01:05.452-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:blog_database user=SA
+2025-09-23T19:01:05.454-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-23T19:01:05.517-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-23T19:01:06.461-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-23T19:01:06.527-03:00 DEBUG 5636 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table drone (
+        id uuid not null,
+        battery_capacity integer not null,
+        model varchar(50) not null,
+        status varchar(50),
+        primary key (id)
+    )
+2025-09-23T19:01:06.539-03:00 DEBUG 5636 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    create table mission (
+        id uuid not null,
+        description varchar(100) not null,
+        estimated_battery_usage integer,
+        location varchar(50) not null,
+        schedule_date date not null,
+        drone_id uuid not null,
+        primary key (id)
+    )
+2025-09-23T19:01:06.544-03:00 DEBUG 5636 --- [Project-Mission-Drone] [restartedMain] org.hibernate.SQL                        : 
+    alter table if exists mission 
+       add constraint FKpecghq3rkd466r7rp8ew0g7b 
+       foreign key (drone_id) 
+       references drone
+2025-09-23T19:01:06.556-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-23T19:01:07.181-03:00  WARN 5636 --- [Project-Mission-Drone] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-23T19:01:07.692-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:blog_database'
+2025-09-23T19:01:07.773-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-23T19:01:07.820-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-23T19:01:07.830-03:00  INFO 5636 --- [Project-Mission-Drone] [restartedMain] c.f.t.j.m.ProjectMissionDroneApplication : Started ProjectMissionDroneApplication in 5.594 seconds (process running for 7.386)
+2025-09-23T19:01:22.477-03:00  INFO 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-23T19:01:22.477-03:00  INFO 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-23T19:01:22.479-03:00  INFO 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-09-23T19:01:23.863-03:00  INFO 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 419 ms
+2025-09-23T19:02:34.680-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:02:34.715-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:02:34.736-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        drone
+        (battery_capacity, model, status, id) 
+    values
+        (?, ?, ?, ?)
+2025-09-23T19:03:09.848-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:09.849-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:09.851-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    insert 
+    into
+        mission
+        (description, drone_id, estimated_battery_usage, location, schedule_date, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-23T19:03:24.952-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:24.953-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:24.954-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    insert 
+    into
+        mission
+        (description, drone_id, estimated_battery_usage, location, schedule_date, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-23T19:03:42.880-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:42.881-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:03:42.888-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    insert 
+    into
+        mission
+        (description, drone_id, estimated_battery_usage, location, schedule_date, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-23T19:04:22.876-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:04:23.323-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        drone d1_0 
+    where
+        d1_0.id=?
+2025-09-23T19:04:23.342-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:04:23.344-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAverageBatteryUsage]: This method is not transactional.
+2025-09-23T19:04:23.449-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        avg(cast(m1_0.estimated_battery_usage as float(53))) 
+    from
+        mission m1_0 
+    where
+        m1_0.drone_id=?
+2025-09-23T19:05:01.699-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:05:01.700-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:05:01.701-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    insert 
+    into
+        mission
+        (description, drone_id, estimated_battery_usage, location, schedule_date, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-23T19:05:08.437-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:05:08.439-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        drone d1_0 
+    where
+        d1_0.id=?
+2025-09-23T19:05:08.440-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:05:08.440-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAverageBatteryUsage]: This method is not transactional.
+2025-09-23T19:05:08.441-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        avg(cast(m1_0.estimated_battery_usage as float(53))) 
+    from
+        mission m1_0 
+    where
+        m1_0.drone_id=?
+2025-09-23T19:05:28.033-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:05:28.034-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-09-23T19:05:28.036-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    insert 
+    into
+        mission
+        (description, drone_id, estimated_battery_usage, location, schedule_date, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-09-23T19:05:32.413-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:05:32.414-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        drone d1_0 
+    where
+        d1_0.id=?
+2025-09-23T19:05:32.415-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2025-09-23T19:05:32.416-03:00 TRACE 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAverageBatteryUsage]: This method is not transactional.
+2025-09-23T19:05:32.417-03:00 DEBUG 5636 --- [Project-Mission-Drone] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        avg(cast(m1_0.estimated_battery_usage as float(53))) 
+    from
+        mission m1_0 
+    where
+        m1_0.drone_id=?
+2025-09-23T19:06:15.370-03:00  INFO 5636 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-23T19:06:15.376-03:00  INFO 5636 --- [Project-Mission-Drone] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-23T19:06:15.381-03:00  INFO 5636 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-23T19:06:15.386-03:00  WARN 5636 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-09-23T19:06:15.387-03:00  INFO 5636 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-23T19:06:15.389-03:00  INFO 5636 --- [Project-Mission-Drone] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
