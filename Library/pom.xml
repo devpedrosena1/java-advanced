@@ -139,8 +139,32 @@
 			<artifactId>swagger-models</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-	</dependencies>
 
+		<!-- INIT OF SECURITY AND JSON WEB TOKEN (JWT) DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.6</version>
+		</dependency>
+	</dependencies>
+	<!-- END OF SECURITY AND JSON WEB TOKEN (JWT) DEPENDENCIES -->
 
 
 	<build>
