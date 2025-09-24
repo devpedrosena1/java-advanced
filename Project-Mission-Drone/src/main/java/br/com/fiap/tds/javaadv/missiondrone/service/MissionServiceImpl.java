@@ -27,7 +27,7 @@ public class MissionServiceImpl implements MissionService{
 
     @Override
     public List<Mission> findAll() {
-        return List.of();
+        return this.missionRepository.findAll();
     }
 
     @Override

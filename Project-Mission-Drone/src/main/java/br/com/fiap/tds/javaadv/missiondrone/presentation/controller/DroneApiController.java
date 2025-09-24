@@ -2,6 +2,7 @@ package br.com.fiap.tds.javaadv.missiondrone.presentation.controller;
 
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Drone;
 import br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects.DroneDTO;
+import br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects.DroneRankingDTO;
 import br.com.fiap.tds.javaadv.missiondrone.service.DroneService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,7 +37,7 @@ public class DroneApiController {
         return new ResponseEntity<>(DroneDTO.fromEntity(newDrone), HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Return drone by id")
+    @Operation(summary = "Return drone by id", method = "GET")
     @GetMapping("/{id}")
     public ResponseEntity<DroneDTO> findById(@PathVariable("id") UUID id) {
         return this.droneService.findById(id)
@@ -43,7 +45,7 @@ public class DroneApiController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Update the complete drone object")
+    @Operation(summary = "Update the complete drone object", method = "PUT")
     @PutMapping("/{id}")
     public ResponseEntity<DroneDTO> update(@PathVariable("id") UUID id, @Valid @RequestBody DroneDTO droneDto) {
         if (!this.droneService.existsById(id))
@@ -56,7 +58,7 @@ public class DroneApiController {
         );
     }
 
-    @Operation(summary = "Update partial drone by id")
+    @Operation(summary = "Update partial drone by id", method = "PATCH")
     @PatchMapping("/{id}")
     public ResponseEntity<DroneDTO> partialUpdate(@PathVariable("id") UUID id, @Valid @RequestBody DroneDTO droneDto) {
         Drone updatedDrone = null;
@@ -72,7 +74,7 @@ public class DroneApiController {
         }
     }
 
-    @Operation(summary = "Delete drone by id")
+    @Operation(summary = "Delete drone by id", method = "DELETE")
     @DeleteMapping
     public ResponseEntity<Void> deleteById(@RequestBody UUID id) {
         if (!this.droneService.existsById(id))
@@ -81,7 +83,7 @@ public class DroneApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Delete the complete drone object")
+    @Operation(summary = "Delete the complete drone object", method = "DELETE")
     @DeleteMapping("/removeObject")
     public ResponseEntity<Void> delete(@RequestBody DroneDTO droneDto) {
         if (!this.droneService.existsById(droneDto.getId()))
@@ -91,10 +93,17 @@ public class DroneApiController {
 
     }
 
-    @Operation(summary = "Return report battery by drone id")
+    @Operation(summary = "Return report battery by drone id", method = "GET")
     @GetMapping("/{id}/battery-report")
     public ResponseEntity<Double> findAverageBatteryUsage(@PathVariable("id") UUID id) {
         Double average = droneService.findAverageBatteryUsage(id);
         return ResponseEntity.ok(average);
+    }
+
+    @Operation(summary = "Return raking of drones by mission", method = "GET")
+    @GetMapping("ranking")
+    public ResponseEntity<List<DroneRankingDTO>>  findDroneRanking() {
+        List<DroneRankingDTO> ranking = droneService.findDroneUsageRanking();
+        return ResponseEntity.ok(ranking);
     }
 }

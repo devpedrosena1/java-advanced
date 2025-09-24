@@ -2,6 +2,7 @@ package br.com.fiap.tds.javaadv.missiondrone.service;
 
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Drone;
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.repositories.DroneRepository;
+import br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects.DroneRankingDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +71,10 @@ public class DroneServiceImpl implements DroneService {
         }
         Optional<Double> optionalAverage = this.droneRepository.findAverageBatteryUsage(droneId);
         return optionalAverage.orElse(0.0);
+    }
+
+    @Override
+    public List<DroneRankingDTO> findDroneUsageRanking() {
+        return this.droneRepository.findDroneUsageRanking();
     }
 }

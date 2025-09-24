@@ -1,6 +1,7 @@
 package br.com.fiap.tds.javaadv.missiondrone.service;
 
 import br.com.fiap.tds.javaadv.missiondrone.domainmodel.Drone;
+import br.com.fiap.tds.javaadv.missiondrone.presentation.transferObjects.DroneRankingDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +17,6 @@ public interface DroneService {
     public void remove(Drone drone);
     public void removeById(UUID id);
     public Double findAverageBatteryUsage(UUID droneId);
+    public List<DroneRankingDTO> findDroneUsageRanking();
 
 }

@@ -47,7 +47,7 @@ public class MissionApiController {
 
     @Operation(summary = "Returns all missions assigned to a specific drone")
     @GetMapping("/mission-drone/{droneId}")
-    public List<MissionDTO> getMissionsByDrone(@PathVariable UUID droneId) {
+    public List<MissionDTO> getMissionsByDrone(@PathVariable("droneId") UUID droneId) {
         return missionService.findByDroneId_Id(droneId)
                 .stream()
                 .map(MissionDTO::fromEntity)
