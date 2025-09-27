@@ -169,4 +169,4 @@ A documentação Swagger estará disponível em:
 
 ## 👥 Contribuidores
 
-- [**@devpedrosena1**](https://github.com/devpedrosena) — Desenvolvimento Backend
+- [**@devpedrosena1**](https://github.com/devpedrosena1) — Desenvolvimento Backend
