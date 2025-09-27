@@ -57,22 +57,21 @@ Representa uma missão atribuída a um drone específico.
 
 ### **Drones** (`/api/v1/drones`)
 
-- `GET /api/v1/drones` → Lista todos os drones
-- `GET /api/v1/drones/{id}` → Busca drone por ID
-- `GET /api/v1/drones/{id}/missions` → Lista missões associadas a um drone
-- `GET /api/v1/drones/{id}/future-missions` → Lista missões futuras de um drone
-- `GET /api/v1/drones/{id}/battery-report` → Relatório de uso de bateria de um drone
-- `GET /api/v1/drones/usage-ranking` → Exibe ranking de drones por uso de bateria
-- `POST /api/v1/drones` → Cadastra um novo drone
-- `PUT /api/v1/drones/{id}` → Atualiza informações de um drone
-- `DELETE /api/v1/drones` → Remove todos os drones (se aplicável)
+- `POST /api/drone` → Insere um novo drone
+- `GET /api/drone/{id}` → Busca drone por ID
+- `PUT /api/drone/{id}` → Atualiza um drone (objeto inteiro) por ID
+- `PATCH /api/drone/{id}` → Atualiza parcialmente um drone por ID
+- `DELETE /api/drone` → Remove o objeto drone por ID
+- `DELETE /api/drone/removeObject` → Remove objeto drone inteiro
+- `GET /api/drone/{id}/baterry-report` → Retorna a média de bateria de drone por ID
+- `GET /api/drone/{id}/ranking` → Retorna o ranking de drones por missão
 
 ### **Missões** (`/api/v1/missions`)
 
-- `GET /api/v1/missions` → Lista todas as missões
-- `GET /api/v1/missions/{id}` → Busca missão por ID
-- `GET /api/v1/missions/by-location` → Busca missões filtradas por localização
-- `POST /api/v1/missions` → Cadastra uma nova missão
+- `GET /api/mission` → Lista todas as missões
+- `GET /api/mission/{id}` → Busca missão por ID
+- `GET /api/mission/mission-drone/{droneId}` → Busca missões ligadas a um drone específico
+- `POST /api/mission` → Cadastra uma nova missão
 
 ---
 
@@ -81,23 +80,12 @@ Representa uma missão atribuída a um drone específico.
 ### **Cadastrar Drones**
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/drones \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "DJI Mavic 3",
-    "batteryCapacity": 4800,
-    "status": "ativo"
-  }'
-```
-
-```bash
-curl -X POST http://localhost:8080/api/v1/drones \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "Parrot Anafi",
-    "batteryCapacity": 2700,
-    "status": "manutenção"
-  }'
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "model": "string",
+  "batteryCapacity": 0,
+  "status": "string"
+}
 ```
 
 ---
@@ -105,47 +93,14 @@ curl -X POST http://localhost:8080/api/v1/drones \
 ### **Cadastrar Missões**
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/missions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "description": "Inspeção de linha de transmissão",
-    "location": "São Paulo",
-    "scheduledData": "2025-10-15",
-    "droneId": ${droneId}
-  }'
-```
-
-```bash
-curl -X POST http://localhost:8080/api/v1/missions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "description": "Entrega de suprimentos médicos",
-    "location": "Rio de Janeiro",
-    "scheduledData": "2025-10-20",
-    "droneId": ${droneId}
-  }'
-```
-
-```bash
-curl -X POST http://localhost:8080/api/v1/missions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "description": "Monitoramento agrícola",
-    "location": "Campinas",
-    "scheduledData": "2025-10-25",
-    "droneId": ${droneId}
-  }'
-```
-
-```bash
-curl -X POST http://localhost:8080/api/v1/missions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "description": "Mapeamento de área de risco",
-    "location": "Belo Horizonte",
-    "scheduledData": "2025-10-30",
-    "droneId": ${droneId}
-  }'
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "description": "string",
+  "location": "string",
+  "scheduledDate": "2025-09-27",
+  "droneId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "estimatedBatteryUsage": 0
+}
 ```
 
 ---
